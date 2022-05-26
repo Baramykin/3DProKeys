@@ -67,53 +67,58 @@ function recived_data(bitsArray) {
 
 
 // ENABLE ALL CHECK BOX
+document.querySelectorAll('.ctrl1_all').forEach(function (element) {
+	let ctrl1_all_box = document.querySelector('.ctrl1_all[value=""]');
+	element.addEventListener('click', function () {
+		document.querySelectorAll('.ctrl_1').forEach(function (element) {
+			element.checked = ctrl1_all_box.checked;
+		});
+		// ctrl2_all_box.checked = false;
+	});	
+});
+document.querySelectorAll('.alt1_all').forEach(function (element) {
+	let alt1_all_box = document.querySelector('.alt1_all[value=""]');
+	element.addEventListener('click', function () {
+		document.querySelectorAll('.alt_1').forEach(function (element) {
+			element.checked = alt1_all_box.checked;
+		});
+	});	
+});
+document.querySelectorAll('.shift1_all').forEach(function (element) {
+	let shift1_all_box = document.querySelector('.shift1_all[value=""]');
+	element.addEventListener('click', function () {
+		document.querySelectorAll('.shift_1').forEach(function (element) {
+			element.checked = shift1_all_box.checked;
+		});
+	});	
+});
+
+
 document.querySelectorAll('.ctrl2_all').forEach(function (element) {
 	let ctrl2_all_box = document.querySelector('.ctrl2_all[value=""]');
 	element.addEventListener('click', function () {
 		document.querySelectorAll('.ctrl_2').forEach(function (element) {
 			element.checked = ctrl2_all_box.checked;
 		});
-		// ctrl2_all_box.checked = false;
+	});	
+});
+document.querySelectorAll('.alt2_all').forEach(function (element) {
+	let alt2_all_box = document.querySelector('.alt2_all[value=""]');
+	element.addEventListener('click', function () {
+		document.querySelectorAll('.alt_2').forEach(function (element) {
+			element.checked = alt2_all_box.checked;
+		});
+	});	
+});
+document.querySelectorAll('.shift2_all').forEach(function (element) {
+	let shift2_all_box = document.querySelector('.shift2_all[value=""]');
+	element.addEventListener('click', function () {
+		document.querySelectorAll('.shift_2').forEach(function (element) {
+			element.checked = shift2_all_box.checked;
+		});
 	});	
 });
 
-
-
-
-
-
-
-
-
-// START CHECK BOX
-// document.querySelectorAll('.ctrl2_all').forEach(function (element) {
-// 	// console.log(element.value, document.querySelector('.ctrl2_all').checked);
-// 	element.onclick = orderFunction;
-// });
-
-
-// function orderFunction() {
-// 	let ctrl2_all_box = document.querySelector('.ctrl2_all[value=""]');
-// 	let second_box = document.querySelector('.order[value="second"]');
-// 	let therd_box = document.querySelector('.order[value="therd"]');
-// 	// ctrl2_all_box.value = 'first_on';
-// 	// document.querySelector('.order'),innerText = 'first_on';
-// 	// console.log(ctrl2_all_box.checked);
-// 	// console.log(second_box.checked);
-// 	// console.log(therd_box.checked);
-
-// 	// document.querySelectorAll('.ctrl_2').forEach(function (element) {
-// 	// 	element.checked = ctrl2_all_box.checked;
-
-// 	// });
-
-
-// 	// let first_box = document.querySelector('.ctrl_2[value="ctrl"]'); // send data to chekbox
-// 	// first_box.checked = ctrl2_all_box.checked;
-
-
-// }
-// END CHECK BOX
 
 
 // START DROPDOWN LIST
@@ -169,7 +174,7 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 });
 // END DROPDOWN LIST
 
-
+// SAVE BOTTOM
 document.querySelector('.b-save').addEventListener('click', () => {
 	let ctrl_arr = [];
 	let key_arr = [];

@@ -26,7 +26,7 @@ body {
 	color: #454545;
 }
 
-.form-group + .form-group {
+.form-group+.form-group {
 	/* margin-top: 10px; */
 }
 
@@ -35,19 +35,23 @@ label {
 }
 
 .about {
-	display:inline-block;
-   }
-   
+	display: inline-block;
+}
+
 .about img {
-	display:block;
-   }
-   
-   
+	display: block;
+}
+
+.checkbox_all {
+	position: relative;
+	padding-top: 0px;
+}
+
 /* *******************
 Select c dropdown на JS
 ******************* */
 .input-key {
-	position: relative;	
+	position: relative;
 }
 
 .input-key_field {
@@ -68,7 +72,7 @@ Select c dropdown на JS
 
 	font-weight: 400;
 	font-size: 14px;
-	line-height: 20px;	
+	line-height: 20px;
 }
 
 
@@ -99,7 +103,8 @@ Select c dropdown на JS
 	cursor: pointer;
 }
 
-.dropdown__button:focus, .dropdown__button--active {
+.dropdown__button:focus,
+.dropdown__button--active {
 	outline: none;
 	box-shadow: 0px 0px 0px 4px rgba(176, 198, 225, 0.6);
 }
@@ -112,10 +117,10 @@ Select c dropdown на JS
 	transform: translateY(-50%);
 
 	/* Рисуем треугольник */
-    width: 0;
-    height: 0;
-    border-width: 8px 6px 0 6px;
-    border-color: #79849B transparent transparent transparent;
+	width: 0;
+	height: 0;
+	border-width: 8px 6px 0 6px;
+	border-color: #79849B transparent transparent transparent;
 	border-style: solid;
 
 	/* Снимаем клик с треугольника */
@@ -155,7 +160,7 @@ Select c dropdown на JS
 	border-bottom: 0px;
 	padding: 6px;
 	cursor: pointer;
-	
+
 }
 
 .dropdown__list-item:first-child {
