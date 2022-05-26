@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+  <title>KEY PAD PRO V1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <p>
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>.
+  </p>
+  <p>
+    <input type="button" onclick="get_ports()" value="Find ports" />
+  </p>
+  <p>
+    <input type="button" onclick="get_layer()" value="Read layer" />
+  </p>
+
+  <div id="images">
+    <div class="about">
+      <div class="top-title"> Layer: </div>
+    </div>
+    &nbsp;
+    <div class="about">
+      <div class="form-group">
+        <div class="dropdown">
+          <button class="dropdown__button">Select</button>
+          <ul class="dropdown__list">
+            <li class="dropdown__list-item" onclick="get_layer(1)">1</li>
+            <li class="dropdown__list-item" onclick="get_layer(2)">2</li>
+            <li class="dropdown__list-item" onclick="get_layer(3)">3</li>
+            <li class="dropdown__list-item" onclick="get_layer(4)">4</li>
+            <li class="dropdown__list-item" onclick="get_layer(5)">5</li>
+            <li class="dropdown__list-item" onclick="get_layer(6)">6</li>
+            <li class="dropdown__list-item" onclick="get_layer(7)">7</li>
+            <li class="dropdown__list-item" onclick="get_layer(8)">8</li>
+            <li class="dropdown__list-item" onclick="get_layer(9)">9</li>
+          </ul>
+          <input type="text" name="select-category" value="" class="dropdown__input-hidden">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="images">
+    <div class="about">
+
+      <div class="form-group-title"> Ctrl &nbsp; Alt &nbsp; Shift &nbsp; Key &nbsp; New key </div>
+      <!-- START LINE 1 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 1 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_1" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 1-->
+
+      <!-- START LINE 2 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_2" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 2 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_2" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 2 -->
+
+      <!-- START LINE 3 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_3" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 3 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_3" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 3 -->
+
+      <!-- START LINE 4 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_4" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 4 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_4" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 4 -->
+
+      <!-- START LINE 5 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_5" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 5 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_5" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 5 -->
+
+      <!-- START LINE 6 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_6" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 6 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_6" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 6 -->
+
+      <!-- START LINE 7 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_7" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 7 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_7" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 7 -->
+
+      <!-- START LINE 8 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_8" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 8 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_8" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 8 -->
+
+
+      <!-- START LINE 9 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_9" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 9 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_9" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 9 -->
+
+      <!-- START LINE 0 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_0" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 0 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_0" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 0 -->
+    </div>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <div class="about">
+      <div class="form-group-title"> Ctrl &nbsp; Alt &nbsp; Shift &nbsp; Key &nbsp; New key </div>
+      <!-- START LINE 1 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 1 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_1" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 1-->
+
+      <!-- START LINE 2 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_2" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 2 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_2" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 2 -->
+
+      <!-- START LINE 3 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_3" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 3 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_3" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 3 -->
+
+      <!-- START LINE 4 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_4" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 4 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_4" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 4 -->
+
+      <!-- START LINE 5 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_5" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 5 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_5" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 5 -->
+
+      <!-- START LINE 6 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_6" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 6 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_6" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 6 -->
+
+      <!-- START LINE 7 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_7" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 7 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_7" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 7 -->
+
+      <!-- START LINE 8 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_8" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 8 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_8" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 8 -->
+
+      <!-- START LINE 9 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_9" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 9 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_9" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 9 -->
+
+      <!-- START LINE 0 -->
+      <div id="images">
+        <div class="about">
+          <!-- CTRL -->
+          <div class="checkbox">
+            <input type="checkbox" class="ctrl" value="ctrl" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- ALT -->
+          <div class="checkbox">
+            <input type="checkbox" class="alt" value="alt_0" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="about">
+          <!-- SHIFT -->
+          <div class="checkbox">
+            <input type="checkbox" class="shift" value="shift" id="m-key" />
+          </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- ORIGANAL KEY -->
+        <div class="about">
+          <div class="form-group-title"> 0 </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        <!-- NEW KEY NAME -->
+        <div class="about">
+          <div class="form-group">
+            <div class="input-key">
+              <input type="text" name="type_0" value="" class="input-key_field" id="new_key">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LINE 0 -->
+
+    </div>
+
+  </div>
+
+
+  <div>
+    <input type="button" class="b-save" value="Save" />
+  </div>
+
+
+
+
+  <!-- 
+
+  <div class="form-group">
+    <div class="dropdown">
+      <button class="dropdown__button">Key 2</button>
+      <ul class="dropdown__list">
+        <li class="dropdown__list-item" data-value="travel">Q</li>
+        <li class="dropdown__list-item" data-value="lessons">W</li>
+        <li class="dropdown__list-item" data-value="photo">E</li>
+        <li class="dropdown__list-item" data-value="sport">R</li>
+      </ul>
+      <input type="text" name="select-category" value="" class="dropdown__input-hidden">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="dropdown">
+      <button class="dropdown__button">Key 3</button>
+      <ul class="dropdown__list">
+        <li class="dropdown__list-item" data-value="travel">Q</li>
+        <li class="dropdown__list-item" data-value="lessons">W</li>
+        <li class="dropdown__list-item" data-value="photo">E</li>
+        <li class="dropdown__list-item" data-value="sport">R</li>
+      </ul>
+      <input type="text" name="select-category" value="" class="dropdown__input-hidden">
+    </div>
+  </div> -->
+
+
+</body>
+
+<script src="./renderer.js"></script>
+
+</html>
