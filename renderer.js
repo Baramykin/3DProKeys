@@ -66,24 +66,53 @@ function recived_data(bitsArray) {
 }
 
 
-// START CHECK BOX
-document.querySelectorAll('.order').forEach(function (element) {
-	console.log(element.value, document.querySelector('.order').checked);
-	element.onclick = orderFunction;
+// ENABLE ALL CHECK BOX
+document.querySelectorAll('.ctrl2_all').forEach(function (element) {
+	let ctrl2_all_box = document.querySelector('.ctrl2_all[value=""]');
+	element.addEventListener('click', function () {
+		document.querySelectorAll('.ctrl_2').forEach(function (element) {
+			element.checked = ctrl2_all_box.checked;
+		});
+		// ctrl2_all_box.checked = false;
+	});	
 });
 
 
-function orderFunction() {
-	let first_box = document.querySelector('.order[value="first"]');
-	let second_box = document.querySelector('.order[value="second"]');
-	let therd_box = document.querySelector('.order[value="therd"]');
-	// first_box.checked = true;
-	// first_box.value = 'first_on';
-	// document.querySelector('.order'),innerText = 'first_on';
-	console.log(first_box.checked);
-	console.log(second_box.checked);
-	console.log(therd_box.checked);
-}
+
+
+
+
+
+
+
+// START CHECK BOX
+// document.querySelectorAll('.ctrl2_all').forEach(function (element) {
+// 	// console.log(element.value, document.querySelector('.ctrl2_all').checked);
+// 	element.onclick = orderFunction;
+// });
+
+
+// function orderFunction() {
+// 	let ctrl2_all_box = document.querySelector('.ctrl2_all[value=""]');
+// 	let second_box = document.querySelector('.order[value="second"]');
+// 	let therd_box = document.querySelector('.order[value="therd"]');
+// 	// ctrl2_all_box.value = 'first_on';
+// 	// document.querySelector('.order'),innerText = 'first_on';
+// 	// console.log(ctrl2_all_box.checked);
+// 	// console.log(second_box.checked);
+// 	// console.log(therd_box.checked);
+
+// 	// document.querySelectorAll('.ctrl_2').forEach(function (element) {
+// 	// 	element.checked = ctrl2_all_box.checked;
+
+// 	// });
+
+
+// 	// let first_box = document.querySelector('.ctrl_2[value="ctrl"]'); // send data to chekbox
+// 	// first_box.checked = ctrl2_all_box.checked;
+
+
+// }
 // END CHECK BOX
 
 
@@ -151,7 +180,6 @@ document.querySelector('.b-save').addEventListener('click', () => {
 		ctrl_arr.push(element.checked);
 	});
 
-
 	console.log(ctrl_arr);
 	console.log(key_arr);
 
@@ -161,11 +189,6 @@ document.querySelector('.b-save').addEventListener('click', () => {
 	// var inputType = document.querySelector('input[name="type_1"]'); // send data to input field
 	// inputType.value = '123';
 });
-
-
-
-
-
 
 
 
