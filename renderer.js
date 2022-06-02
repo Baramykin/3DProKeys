@@ -12,6 +12,7 @@ var layers_arr = [
 	[16, 1, 2, 3, 4, 5], [17, 1, 2, 3, 4, 5], [18, 1, 2, 3, 4, 5], [19, 1, 2, 3, 4, 5], [20, 1, 2, 3, 4, 5],
 ];
 
+
 parser.on('data', function (data) {
 	var bits = data;
 	bitsArray.push(bits);
@@ -28,7 +29,7 @@ parser.on('data', function (data) {
 	}
 	if (first_l == 'LAY') { // If first letter is L - LAYER continue read arr from Serial
 		if (bitsArray.length >= 20) {
-			console.log("Read mode");
+			// console.log("Read mode");
 			recived_data(bitsArray);
 		}
 	} else {
@@ -37,7 +38,7 @@ parser.on('data', function (data) {
 });
 
 function recived_data(bitsArray) {
-	console.log(bitsArray.length);
+	// console.log(bitsArray.length);
 	let counter_a = 0;
 	let counter_b = 0;
 	bitsArray.forEach((i) => { // Separate Line (LAYER 20 0 0 0 0 48) to each symbol
@@ -61,8 +62,26 @@ function recived_data(bitsArray) {
 		counter_a++;
 		counter_b = 0;
 	})
-	console.log('------', layers_arr);
+	console.log('------');
+	palce_data(layers_arr);
 	bitsArray.length = 0;
+}
+
+function palce_data(data_arr) {
+	console.log(data_arr.length);
+	for (let i = 0; i < data_arr.length; i++) {
+		console.log(data_arr[i]);
+		for (let index = 0; index < data_arr[i].length; index++) {
+			// console.log(data_arr[i][index]);
+			let asdd = 'type_' + index;
+			console.log(asdd);
+			var inputType = document.querySelector('input[name=' + asdd + ']'); // send data to input field
+			inputType.value = '123';
+		}
+	}
+
+	// var inputType = document.querySelector('input[name=' + asdd + ']'); // send data to input field
+	// inputType.value = '123';
 }
 
 
@@ -74,7 +93,7 @@ document.querySelectorAll('.ctrl1_all').forEach(function (element) {
 			element.checked = ctrl1_all_box.checked;
 		});
 		// ctrl2_all_box.checked = false;
-	});	
+	});
 });
 document.querySelectorAll('.alt1_all').forEach(function (element) {
 	let alt1_all_box = document.querySelector('.alt1_all[value=""]');
@@ -82,7 +101,7 @@ document.querySelectorAll('.alt1_all').forEach(function (element) {
 		document.querySelectorAll('.alt_1').forEach(function (element) {
 			element.checked = alt1_all_box.checked;
 		});
-	});	
+	});
 });
 document.querySelectorAll('.shift1_all').forEach(function (element) {
 	let shift1_all_box = document.querySelector('.shift1_all[value=""]');
@@ -90,7 +109,7 @@ document.querySelectorAll('.shift1_all').forEach(function (element) {
 		document.querySelectorAll('.shift_1').forEach(function (element) {
 			element.checked = shift1_all_box.checked;
 		});
-	});	
+	});
 });
 
 
@@ -100,7 +119,7 @@ document.querySelectorAll('.ctrl2_all').forEach(function (element) {
 		document.querySelectorAll('.ctrl_2').forEach(function (element) {
 			element.checked = ctrl2_all_box.checked;
 		});
-	});	
+	});
 });
 document.querySelectorAll('.alt2_all').forEach(function (element) {
 	let alt2_all_box = document.querySelector('.alt2_all[value=""]');
@@ -108,7 +127,7 @@ document.querySelectorAll('.alt2_all').forEach(function (element) {
 		document.querySelectorAll('.alt_2').forEach(function (element) {
 			element.checked = alt2_all_box.checked;
 		});
-	});	
+	});
 });
 document.querySelectorAll('.shift2_all').forEach(function (element) {
 	let shift2_all_box = document.querySelector('.shift2_all[value=""]');
@@ -116,7 +135,7 @@ document.querySelectorAll('.shift2_all').forEach(function (element) {
 		document.querySelectorAll('.shift_2').forEach(function (element) {
 			element.checked = shift2_all_box.checked;
 		});
-	});	
+	});
 });
 
 
@@ -152,7 +171,7 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 			dropDownBtn.focus();
 			dropDownInput.value = this.dataset.value;
 			dropDownList.classList.remove('dropdown__list--visible');
-			console.log(dropDownInput.value);
+			// console.log(dropDownInput.value);
 		});
 	});
 
@@ -208,7 +227,7 @@ function get_ports() {
 
 
 function get_layer(x) {
-	console.log('L: ', x)
+	// console.log('L: ', x)
 	let send_data = '$READ ' + x + ';';
 	console.log('Called: ', send_data)
 	port.write(send_data)
