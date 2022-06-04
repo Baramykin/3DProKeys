@@ -1,7 +1,51 @@
 const { SerialPort } = require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline');
-const port = new SerialPort({ path: 'COM4', baudRate: 9600 });
-const parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
+// const port = new SerialPort({ path: 'COM4', baudRate: 9600 });
+// const parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
+
+var port;
+var parser;
+let port_name = '';
+let connection = 1;
+let dis_connection = 1;
+
+async function get_ports(subject, callback) {
+	// console.log('Find ports...');
+	await SerialPort.list().then((ports) => {
+		if (ports.length === 0) {
+			console.log('No ports discovered');
+		}
+		for (let i = 0; i < ports.length; i++) {
+			let str = ports[i].friendlyName.indexOf('Board CDC');
+			if (str === 0) {			//  && port_name != ports[i].path
+				if (port_name != ports[i].path) {
+					port_name = ports[i].path;
+					console.log('Port_name: ', port_name, 'connected!');
+					port = new SerialPort({ path: port_name, baudRate: 9600 });
+					parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
+					connection = 1;
+					dis_connection = 1;
+				}
+				callback();
+				return;
+			}
+		}
+		if (dis_connection) {		
+		console.log('Disconnected');
+		dis_connection = 0;
+		port_name = '';
+		}
+	});
+}
+
+function dummy() {
+
+}
+
+setInterval(() => {
+	get_ports('', port_listener);
+}, 2000);
+
 
 
 let bitsArray = [];
@@ -12,30 +56,37 @@ var layers_arr = [
 	[16, 1, 2, 3, 4, 5], [17, 1, 2, 3, 4, 5], [18, 1, 2, 3, 4, 5], [19, 1, 2, 3, 4, 5], [20, 1, 2, 3, 4, 5],
 ];
 
+function port_listener() {
+	if (connection) {
+		connection = 0;
+		console.log('listening on port');
+		parser.on('data', function (data) {
+			console.log('====================');
+			var bits = data;
+			bitsArray.push(bits);
+			let first_l = '';
+			let asd = Array.from(bitsArray); // Get first letter from Serial to detect modes	
+			let temp_count = 0;
+			for (const value of asd[temp_count]) {
+				first_l = first_l + value;
+				if (temp_count == 2) {
+					break;
+				}
+				temp_count++;
+			}
 
-parser.on('data', function (data) {
-	var bits = data;
-	bitsArray.push(bits);
+			if (first_l == 'LAY') { // If first letter is L - LAYER continue read arr from Serial
+				if (bitsArray.length >= 20) {
+					console.log("Read mode");
+					recived_data(bitsArray);
+				}
+			} else {
+				bitsArray.length = 0;
+			}
+		});
+	}
+}
 
-	let first_l = '';
-	let asd = Array.from(bitsArray); // Get first letter from Serial to detect modes	
-	let temp_count = 0;
-	for (const value of asd[temp_count]) {
-		first_l = first_l + value;
-		if (temp_count == 2) {
-			break;
-		}
-		temp_count++;
-	}
-	if (first_l == 'LAY') { // If first letter is L - LAYER continue read arr from Serial
-		if (bitsArray.length >= 20) {
-			// console.log("Read mode");
-			recived_data(bitsArray);
-		}
-	} else {
-		bitsArray.length = 0;
-	}
-});
 
 function recived_data(bitsArray) {
 	// console.log(bitsArray.length);
@@ -67,6 +118,7 @@ function recived_data(bitsArray) {
 	bitsArray.length = 0;
 }
 
+
 function palce_data(data_arr) {
 	console.log(data_arr.length);
 	for (let i = 0; i < data_arr.length; i++) {
@@ -74,15 +126,44 @@ function palce_data(data_arr) {
 		for (let index = 0; index < data_arr[i].length; index++) {
 			// console.log(data_arr[i][index]);
 			let asdd = 'type_' + index;
-			console.log(asdd);
+			// console.log(asdd);
 			var inputType = document.querySelector('input[name=' + asdd + ']'); // send data to input field
 			inputType.value = '123';
 		}
 	}
-
 	// var inputType = document.querySelector('input[name=' + asdd + ']'); // send data to input field
 	// inputType.value = '123';
 }
+
+
+
+
+// async function listSerialPorts() {
+// 	await SerialPort.list().then((ports, err) => {
+// 		console.log('ports', port.path);
+// 		if (ports.length === 0) {
+// 			document.getElementById('error').textContent = 'No ports discovered'
+// 		}
+// 	});
+// }
+
+
+
+
+
+function get_layer(x) {
+	// console.log('L: ', x)
+	let send_data = '$READ ' + x + ';';
+	console.log('Called: ', send_data);
+	port.write(send_data);
+}
+
+
+
+
+
+
+
 
 
 // ENABLE ALL CHECK BOX
@@ -141,7 +222,7 @@ document.querySelectorAll('.shift2_all').forEach(function (element) {
 
 
 // START DROPDOWN LIST
-// Полифилл для метода forEach для NodeList
+// Find  forEach for NodeList
 if (window.NodeList && !NodeList.prototype.forEach) {
 	NodeList.prototype.forEach = function (callback, thisArg) {
 		thisArg = thisArg || window;
@@ -157,13 +238,13 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 	const dropDownListItems = dropDownList.querySelectorAll('.dropdown__list-item');
 	const dropDownInput = dropDownWrapper.querySelector('.dropdown__input-hidden');
 
-	// Клик по кнопке. Открыть/Закрыть select
+	// Click Open/Close select
 	dropDownBtn.addEventListener('click', function (e) {
 		dropDownList.classList.toggle('dropdown__list--visible');
 		this.classList.add('dropdown__button--active');
 	});
 
-	// Выбор элемента списка. Запомнить выбранное значение. Закрыть дропдаун
+	// Select form lis. remember value. Close dropdown
 	dropDownListItems.forEach(function (listItem) {
 		listItem.addEventListener('click', function (e) {
 			e.stopPropagation();
@@ -175,7 +256,7 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 		});
 	});
 
-	// Клик снаружи дропдауна. Закрыть дропдаун
+	// If clicked out - close dropdown
 	document.addEventListener('click', function (e) {
 		if (e.target !== dropDownBtn) {
 			dropDownBtn.classList.remove('dropdown__button--active');
@@ -183,7 +264,7 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 		}
 	});
 
-	// Нажатие на Tab или Escape. Закрыть дропдаун
+	// press Tab or Escape key - close dropdown
 	document.addEventListener('keydown', function (e) {
 		if (e.key === 'Tab' || e.key === 'Escape') {
 			dropDownBtn.classList.remove('dropdown__button--active');
@@ -213,23 +294,3 @@ document.querySelector('.b-save').addEventListener('click', () => {
 	// var inputType = document.querySelector('input[name="type_1"]'); // send data to input field
 	// inputType.value = '123';
 });
-
-
-
-function get_ports() {
-	SerialPort.list().then(function (ports) {
-		ports.forEach(function (port) {
-			//   console.log(port);
-			console.log(port.path, port.friendlyName);
-		})
-	});
-}
-
-
-function get_layer(x) {
-	// console.log('L: ', x)
-	let send_data = '$READ ' + x + ';';
-	console.log('Called: ', send_data)
-	port.write(send_data)
-
-}
