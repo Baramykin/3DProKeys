@@ -9,15 +9,6 @@
 </head>
 
 <body>
-  <!-- <p>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-  </p> -->
-  <!-- <p>
-    <input type="button" onclick="get_ports()" value="Find ports" />
-  </p> -->
-
   <div id="images">
     <div class="about">
       <div class="top-title"> Layer: </div>
@@ -42,26 +33,30 @@
         </div>
       </div>
     </div>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <div class="about">
+      <label class="top-title-disabled" id="status">Disconnected</label>
+    </div>
   </div>
 
   <div id="images">
     <div class="about">
       <div class="form-group-title"> Ctrl &nbsp; Alt &nbsp; Shift &nbsp; Key &nbsp; New key </div>
       <div class="checkbox_all">
-        <input type="checkbox" class="ctrl1_all" value="" />
+        <input type="checkbox" class="ctrl1_all" value="" id="state" />
         &nbsp;
         &nbsp;
-        <input type="checkbox" class="alt1_all" value="" />
+        <input type="checkbox" class="alt1_all" value="" id="state" />
         &nbsp;
         &nbsp;
-        <input type="checkbox" class="shift1_all" value="" />
+        <input type="checkbox" class="shift1_all" value="" id="state" />
       </div>
       <!-- START LINE 1 -->
       <div id="images">
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_1" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -69,7 +64,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt" id="m-key" />
+            <input type="checkbox" class="alt_1" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -77,7 +72,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_1" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -104,7 +99,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_2" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -112,7 +107,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_2" id="m-key" />
+            <input type="checkbox" class="alt_2" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -120,7 +115,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_2" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -147,7 +142,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_3" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -155,7 +150,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_3" id="m-key" />
+            <input type="checkbox" class="alt_3" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -163,7 +158,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_3" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -190,7 +185,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_4" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -198,7 +193,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_4" id="m-key" />
+            <input type="checkbox" class="alt_4" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -206,7 +201,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_4" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -233,7 +228,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_5" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -241,7 +236,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_5" id="m-key" />
+            <input type="checkbox" class="alt_5" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -249,7 +244,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_5" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -276,7 +271,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_6" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -284,7 +279,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_6" id="m-key" />
+            <input type="checkbox" class="alt_6" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -292,7 +287,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_6" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -319,7 +314,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_7" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -327,7 +322,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_7" id="m-key" />
+            <input type="checkbox" class="alt_7" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -335,7 +330,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_7" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -362,7 +357,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_8" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -370,7 +365,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_8" id="m-key" />
+            <input type="checkbox" class="alt_8" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -378,7 +373,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_8" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -406,7 +401,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_9" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -414,7 +409,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_9" id="m-key" />
+            <input type="checkbox" class="alt_9" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -422,7 +417,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_9" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -448,7 +443,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_1" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_0" value="ctrl" id="ctrl-key" />
           </div>
         </div>
         &nbsp;
@@ -456,7 +451,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_1" value="alt_0" id="m-key" />
+            <input type="checkbox" class="alt_0" value="alt" id="alt-key" />
           </div>
         </div>
         &nbsp;
@@ -464,7 +459,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_1" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_0" value="shift" id="shift-key" />
           </div>
         </div>
         &nbsp;
@@ -508,7 +503,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_10" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -516,7 +511,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt" id="m-key" />
+            <input type="checkbox" class="alt_10" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -524,7 +519,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_10" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -539,7 +534,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_q" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_10" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -551,7 +546,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_11" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -559,7 +554,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_w" id="m-key" />
+            <input type="checkbox" class="alt_11" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -567,7 +562,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_11" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -582,7 +577,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_w" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_11" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -594,7 +589,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_12" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -602,7 +597,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_e" id="m-key" />
+            <input type="checkbox" class="alt_12" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -610,7 +605,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_12" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -625,7 +620,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_e" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_12" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -637,7 +632,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_13" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -645,7 +640,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_r" id="m-key" />
+            <input type="checkbox" class="alt_13" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -653,7 +648,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_13" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -668,7 +663,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_r" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_13" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -680,7 +675,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_14" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -688,7 +683,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_t" id="m-key" />
+            <input type="checkbox" class="alt_14" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -696,7 +691,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_14" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -711,7 +706,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_t" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_14" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -723,7 +718,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_15" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -731,7 +726,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_y" id="m-key" />
+            <input type="checkbox" class="alt_15" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -739,7 +734,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_15" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -754,7 +749,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_y" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_15" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -766,7 +761,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_16" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -774,7 +769,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_u" id="m-key" />
+            <input type="checkbox" class="alt_16" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -782,7 +777,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_16" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -797,7 +792,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_U" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_16" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -809,7 +804,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_17" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -817,7 +812,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_i" id="m-key" />
+            <input type="checkbox" class="alt_17" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -825,14 +820,14 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_17" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
         &nbsp;
         <!-- ORIGANAL KEY -->
         <div class="about">
-          <div class="form-group-title2" > I </div>
+          <div class="form-group-title2"> I </div>
         </div>
         &nbsp;
         &nbsp;
@@ -840,7 +835,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_i" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_17" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -852,7 +847,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_18" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -860,7 +855,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_o" id="m-key" />
+            <input type="checkbox" class="alt_18" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -868,7 +863,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_18" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -883,7 +878,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_o" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_18" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -895,7 +890,7 @@
         <div class="about">
           <!-- CTRL -->
           <div class="checkbox">
-            <input type="checkbox" class="ctrl_2" value="ctrl" id="m-key" />
+            <input type="checkbox" class="ctrl_19" value="ctrl" id="ctrl2-key" />
           </div>
         </div>
         &nbsp;
@@ -903,7 +898,7 @@
         <div class="about">
           <!-- ALT -->
           <div class="checkbox">
-            <input type="checkbox" class="alt_2" value="alt_p" id="m-key" />
+            <input type="checkbox" class="alt_19" value="alt" id="alt2-key" />
           </div>
         </div>
         &nbsp;
@@ -911,7 +906,7 @@
         <div class="about">
           <!-- SHIFT -->
           <div class="checkbox">
-            <input type="checkbox" class="shift_2" value="shift" id="m-key" />
+            <input type="checkbox" class="shift_19" value="shift" id="shift2-key" />
           </div>
         </div>
         &nbsp;
@@ -926,7 +921,7 @@
         <div class="about">
           <div class="form-group">
             <div class="input-key">
-              <input type="text" name="type_p" value="" class="input-key_field" id="new_key">
+              <input type="text" name="type_19" value="" class="input-key_field" id="new_key">
             </div>
           </div>
         </div>
@@ -939,7 +934,7 @@
 
 
   <div>
-    <input type="button" class="b-save" value="Save" />
+    <input type="button" class="b-save" value="Save" id="save_btn"/>
   </div>
 
 
@@ -977,4 +972,5 @@
 </body>
 
 <script src="./renderer.js"></script>
+
 </html>
