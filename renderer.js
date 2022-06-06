@@ -10,6 +10,8 @@ var parser;
 let port_name = '';
 let connection = 1;
 let dis_connection = 1;
+let selected_layer = '';
+
 
 async function get_ports(subject, callback) {
 	// console.log('Find ports...');
@@ -48,8 +50,6 @@ setInterval(() => {
 }, 2000);
 
 
-
-
 let bitsArray = [];
 var layers_arr = [
 	[1, 1, 2, 3, 4, 5], [2, 1, 2, 3, 4, 5], [3, 1, 2, 3, 4, 5], [4, 1, 2, 3, 4, 5], [5, 1, 2, 3, 4, 5],
@@ -63,7 +63,7 @@ function port_listener() {
 		connection = 0;
 		// console.log('listening on port');
 		parser.on('data', function (data) {
-			// console.log('====================');
+			console.log('> ', data);
 			var bits = data;
 			bitsArray.push(bits);
 			let first_l = '';
@@ -129,6 +129,14 @@ function palce_data(data_arr) {   // Placing read data from device
 		let char = String.fromCharCode(data_arr[i][5]); //Convert ASCII code to character
 		var inputType = document.querySelector('input[name=' + asdd + ']'); // Prepare for send data to input field
 		inputType.value = char; // Send symbol
+		// console.log(i, ' ', data_arr[i][1], data_arr[i][2], data_arr[i][3]);
+		// Setup checkboxes
+		var ctrl_bool = 0; (data_arr[i][1] > 0) ? ctrl_bool = 1 : ctrl_bool = 0;
+		var alt_bool = 0; (data_arr[i][2] > 0) ? alt_bool = 1 : alt_bool = 0;
+		var shift_bool = 0; (data_arr[i][3] > 0) ? shift_bool = 1 : shift_bool = 0;
+		document.querySelector('.ctrl_' + i).checked = ctrl_bool;
+		document.querySelector('.alt_' + i).checked = alt_bool;
+		document.querySelector('.shift_' + i).checked = shift_bool;
 	}
 }
 
@@ -142,22 +150,39 @@ function get_layer(x) {   // Send request to device. Get settings from EEPROM
 // SAVE BOTTOM
 document.querySelector('.b-save').addEventListener('click', () => {
 	let ctrl_arr = [];
+	let alt_arr = [];
+	let shift_arr = [];
 	let key_arr = [];
 	document.querySelectorAll('.input-key_field').forEach(function (element) {
 		key_arr.push(element.value);
 	});
-	document.querySelectorAll('#m-key').forEach(function (element) {
+	document.querySelectorAll('#ctrl-key, #ctrl2-key').forEach(function (element) {
 		ctrl_arr.push(element.checked);
 	});
-
-	console.log(ctrl_arr);
-	console.log(key_arr);
-
-	// let first_box = document.querySelector('.alt[value="alt_2"]'); // send data to chekbox
-	// first_box.checked = true;
-
-	// var inputType = document.querySelector('input[name="type_1"]'); // send data to input field
-	// inputType.value = '123';
+	document.querySelectorAll('#alt-key, #alt2-key').forEach(function (element) {
+		alt_arr.push(element.checked);
+	});
+	document.querySelectorAll('#shift-key, #shift2-key').forEach(function (element) {
+		shift_arr.push(element.checked);
+	});
+	// console.log(ctrl_arr);
+	// console.log(key_arr);
+	let prefix = '$WRITE';
+	let end_line = ';';
+	for (let i = 0; i < ctrl_arr.length; i++) {
+		// console.log(i, ' ', +ctrl_arr[i], ' ', +alt_arr[i], ' ', +shift_arr[i], ' ', key_arr[i]);
+		let layer = i;
+		// let ctrl = +ctrl_arr[i];
+		let ctrl = 0; (ctrl_arr[i]) ? ctrl = 128 : ctrl = 0;
+		let alt = 0; (alt_arr[i]) ? alt = 130 : alt = 0;
+		let shift = 0; (shift_arr[i]) ? shift = 129 : shift = 0;
+		let key = key_arr[i].charCodeAt(0) + '';
+		write_ine = prefix + ' ' + selected_layer + ' ' + ctrl + ' ' + alt + ' ' + shift + ' ' + i + ' ' + key + end_line;
+		console.log(write_ine);
+		port.write(write_ine);
+	}
+	get_layer(selected_layer);
+	console.log('Layer done: ', selected_layer);
 });
 
 
@@ -249,7 +274,8 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 			dropDownBtn.focus();
 			dropDownInput.value = this.dataset.value;
 			dropDownList.classList.remove('dropdown__list--visible');
-			// console.log(dropDownInput.value);
+			selected_layer = dropDownBtn.innerText;
+			// console.log(dropDownBtn.innerText);
 		});
 	});
 
