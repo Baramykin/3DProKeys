@@ -26,6 +26,24 @@ body {
 	cursor: default;
 }
 
+.notation-title {
+	font-family: sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	color: #545454;
+	cursor: default;
+	line-height: 8px;
+}
+
+.notation {
+	font-family: sans-serif;
+	font-weight: 700;
+	font-size: 13px;
+	color: #545454;
+	cursor: default;
+	line-height: 8px;
+}
+
 .form-group-title {
 	font-style: 20px;
 	font-weight: 400;
@@ -70,7 +88,7 @@ Select c dropdown на JS
 .input-key_field {
 	position: relative;
 	display: block;
-	width: 55px;
+	width: 80px;
 	text-align: left;
 
 	background: #FFFFFF;

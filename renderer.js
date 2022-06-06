@@ -1,30 +1,34 @@
+// KEY PAD PRO V1 PRERELISE
+// START DATE: 9.05.2022
+// AUTOR: BARAMYKIN VIKTOR
+// LAST UPDATE: 7.06.2022
+
 const { SerialPort } = require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline');
 // const port = new SerialPort({ path: 'COM4', baudRate: 9600 });
 // const parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
-
-disable_all();
 
 var port;
 var parser;
 let port_name = '';
 let connection = 1;
 let dis_connection = 1;
-let selected_layer = '';
+let selected_layer = 0;
 
+disable_all();
 
 async function get_ports(subject, callback) {
 	// console.log('Find ports...');
 	await SerialPort.list().then((ports) => {
 		if (ports.length === 0) {
-			console.log('No ports discovered');
+			//console.log('No ports discovered');
 		}
 		for (let i = 0; i < ports.length; i++) {
 			let str = ports[i].friendlyName.indexOf('Board CDC'); // Find KeyPro device
 			if (str === 0) {			//  && port_name != ports[i].path
 				if (port_name != ports[i].path) {
 					port_name = ports[i].path;
-					console.log('Port_name: ', port_name, 'connected!');
+					//console.log('Port_name: ', port_name, 'connected!');
 					port = new SerialPort({ path: port_name, baudRate: 9600 });  // connecto to serialport
 					parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
 					connection = 1;
@@ -36,7 +40,7 @@ async function get_ports(subject, callback) {
 			}
 		}
 		if (dis_connection) {
-			console.log('Disconnected');
+			//console.log('Disconnected');
 			dis_connection = 0;
 			port_name = '';
 			disable_all();
@@ -63,7 +67,7 @@ function port_listener() {
 		connection = 0;
 		// console.log('listening on port');
 		parser.on('data', function (data) {
-			console.log('> ', data);
+			//console.log('> ', data);
 			var bits = data;
 			bitsArray.push(bits);
 			let first_l = '';
@@ -79,7 +83,7 @@ function port_listener() {
 
 			if (first_l == 'LAY') { // If first letter is L - LAYER continue read arr from Serial
 				if (bitsArray.length >= 20) {
-					// console.log("Read mode");
+					//console.log("Read mode");
 					recived_data(bitsArray);
 				}
 			} else {
@@ -120,14 +124,44 @@ function recived_data(bitsArray) {
 	bitsArray.length = 0;
 }
 
+let name_arr = ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
+	'DELETE', 'HOME', 'END', 'PAGE_UP', 'PAGE_DOWN',
+	'UP_ARROW', 'DOWN_ARROW', 'LEFT_ARROW', 'RIGHT_ARROW', 'C_LOCK', 'BACKSPACE', 'ENTER', 'MENU', 'TAB',
+	'L_CTRL', 'L_SHIFT', 'L_ALT', 'L_GUI', 'R_CTRL', 'R_SHIFT', 'R_ALT', 'R_GUI'];
+let code_arr = [177, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205,
+	 212, 210, 213, 211, 214, 218, 217, 216, 215, 193, 178, 176, 237, 179,
+	128, 129, 130, 131, 132, 133, 134, 135];
+
+let notaton_1 = '';
+
+for (let i = 0; i < name_arr.length; i++) {
+
+	notaton_1 = notaton_1 + name_arr[i] + ',  ';
+
+}
+
+document.querySelector('#notation1').innerHTML = notaton_1;
+// document.querySelector('#notation2').innerHTML = notaton_2;
 
 function palce_data(data_arr) {   // Placing read data from device
+	let char = '';
 	for (let i = 0; i < data_arr.length; i++) {
-		console.log(data_arr[i]);
+		// console.log(data_arr[i]);
 		type_field = data_arr[i][4]; // Get position
+		if (type_field > 19) {
+			error_device();
+			break;
+		}
 		let asdd = 'type_' + type_field;  // Get ASCII code
-		let char = String.fromCharCode(data_arr[i][5]); //Convert ASCII code to character
+		if (code_arr.indexOf(+data_arr[i][5]) >= 0) {
+			//console.log(data_arr[i][5], ' ', code_arr.indexOf(+data_arr[i][5]));
+			char = name_arr[code_arr.indexOf(+data_arr[i][5])];
+			//console.log(char);
+		} else {
+			char = String.fromCharCode(data_arr[i][5]); //Convert ASCII code to character
+		}
 		var inputType = document.querySelector('input[name=' + asdd + ']'); // Prepare for send data to input field
+		// console.log(data_arr.length);
 		inputType.value = char; // Send symbol
 		// console.log(i, ' ', data_arr[i][1], data_arr[i][2], data_arr[i][3]);
 		// Setup checkboxes
@@ -149,6 +183,7 @@ function get_layer(x) {   // Send request to device. Get settings from EEPROM
 
 // SAVE BOTTOM
 document.querySelector('.b-save').addEventListener('click', () => {
+	document.querySelector('.b-save').setAttribute("disabled", ""); // disable button when save data
 	let ctrl_arr = [];
 	let alt_arr = [];
 	let shift_arr = [];
@@ -165,24 +200,32 @@ document.querySelector('.b-save').addEventListener('click', () => {
 	document.querySelectorAll('#shift-key, #shift2-key').forEach(function (element) {
 		shift_arr.push(element.checked);
 	});
-	// console.log(ctrl_arr);
 	// console.log(key_arr);
 	let prefix = '$WRITE';
 	let end_line = ';';
 	for (let i = 0; i < ctrl_arr.length; i++) {
-		// console.log(i, ' ', +ctrl_arr[i], ' ', +alt_arr[i], ' ', +shift_arr[i], ' ', key_arr[i]);
 		let layer = i;
-		// let ctrl = +ctrl_arr[i];
 		let ctrl = 0; (ctrl_arr[i]) ? ctrl = 128 : ctrl = 0;
 		let alt = 0; (alt_arr[i]) ? alt = 130 : alt = 0;
 		let shift = 0; (shift_arr[i]) ? shift = 129 : shift = 0;
-		let key = key_arr[i].charCodeAt(0) + '';
+		let key = 0;
+		if (key_arr[i].length >= 2) {
+			let index = name_arr.indexOf(key_arr[i]);
+
+
+			//console.log(key_arr[i], ' ', key_arr[i].length, ' ', code_arr[index]);
+			key = code_arr[index];
+
+		} else {
+			key = key_arr[i].charCodeAt(0);
+		}
 		write_ine = prefix + ' ' + selected_layer + ' ' + ctrl + ' ' + alt + ' ' + shift + ' ' + i + ' ' + key + end_line;
-		console.log(write_ine);
+		//console.log(write_ine);
 		port.write(write_ine);
 	}
 	get_layer(selected_layer);
-	console.log('Layer done: ', selected_layer);
+	//console.log('Layer done: ', selected_layer);
+	document.querySelector('.b-save').removeAttribute("disabled", ""); // enable button when saved data done
 });
 
 
@@ -242,7 +285,6 @@ document.querySelectorAll('.shift2_all').forEach(function (element) {
 });
 
 
-
 // START DROPDOWN LIST
 // Find  forEach for NodeList
 if (window.NodeList && !NodeList.prototype.forEach) {
@@ -275,7 +317,7 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 			dropDownInput.value = this.dataset.value;
 			dropDownList.classList.remove('dropdown__list--visible');
 			selected_layer = dropDownBtn.innerText;
-			// console.log(dropDownBtn.innerText);
+			document.querySelector('#save_btn').removeAttribute("disabled", "");  //Enable Seve button
 		});
 	});
 
@@ -299,6 +341,7 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 
 
 function disable_all() {
+	selected_layer = 0; // Reset selected layer
 	document.querySelectorAll('#state, #ctrl-key, #alt-key, #shift-key, #new_key, .dropdown__button, #enable_all, #ctrl2-key, #alt2-key, #shift2-key').forEach(function (element) {
 		element.checked = false;
 		element.value = '';
@@ -313,6 +356,7 @@ function disable_all() {
 		element.classList.add('top-title-disabled');
 	});
 	document.querySelector('#status').innerHTML = 'Disconnected';
+	document.querySelector('.reset_btn').setAttribute("disabled", "");
 }
 
 
@@ -320,14 +364,24 @@ function enable_all() {
 	document.querySelectorAll('#state, #ctrl-key, #alt-key, #shift-key, #new_key, .dropdown__button, #enable_all, #ctrl2-key, #alt2-key, #shift2-key').forEach(function (element) {
 		element.removeAttribute("disabled", "");
 	});
-	document.querySelector('#save_btn').removeAttribute("disabled", "");
-
 	document.querySelector('.dropdown__button').innerHTML = 'Select';
 
 	document.querySelectorAll('.top-title-disabled').forEach(function (element) {
 		element.classList.remove('top-title-disabled');
 		element.classList.add('top-title');
 	});
-
 	document.querySelector('#status').innerHTML = 'Connected';
+}
+
+
+function error_device() {
+	disable_all();
+	//console.log('Reser device, please');
+	document.querySelector('.reset_btn').removeAttribute("disabled", "");  //Activate Reset button
+	return;
+}
+
+
+function reset_device() {
+	port.write('$DEFAULT;');
 }

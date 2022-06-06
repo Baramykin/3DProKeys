@@ -41,7 +41,7 @@
 
   <div id="images">
     <div class="about">
-      <div class="form-group-title"> Ctrl &nbsp; Alt &nbsp; Shift &nbsp; Key &nbsp; New key </div>
+      <div class="form-group-title"> Ctrl &nbsp; Alt &nbsp; Shift &nbsp; Key &nbsp; &nbsp; New key </div>
       <div class="checkbox_all">
         <input type="checkbox" class="ctrl1_all" value="" id="state" />
         &nbsp;
@@ -488,7 +488,7 @@
     &nbsp;
     &nbsp;
     <div class="about">
-      <div class="form-group-title"> Ctrl &nbsp; Alt &nbsp; Shift &nbsp; Key &nbsp; New key </div>
+      <div class="form-group-title"> Ctrl &nbsp; Alt &nbsp; Shift &nbsp; Key &nbsp; &nbsp; New key </div>
       <div class="checkbox_all">
         <input type="checkbox" class="ctrl2_all" value="" id="enable_all" />
         &nbsp;
@@ -931,10 +931,32 @@
     </div>
 
   </div>
-
-
+  <br>
+  <div id="images">
+    <div class="about">
+      <div>
+        <input type="button" class="reset_btn" onclick="reset_device()" value="Reset to default settings" disabled />
+      </div>
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
+    <div class="about">
+      <div>
+        <input type="button" class="b-save" value="Save" id="save_btn" disabled />
+      </div>
+    </div>
+  </div>
   <div>
-    <input type="button" class="b-save" value="Save" id="save_btn" />
+    <label class="notation-title">Compatible symbols and special keys:</label>
+  </div>
+  <div>
+    <label class="notation">0-9, a-z, A-Z, ` ~ ! @ # $ % ^ & * ( ) _ - + \ | [ ] { } / ? . > , < ; : ' " </label>
+  </div>
+  <div>
+    <label class="notation" id="notation1"></label>
+  </div>
+  <div>
+    <label class="notation" id="notation2"></label>
   </div>
 
 </body>
