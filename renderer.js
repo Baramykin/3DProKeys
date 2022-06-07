@@ -18,7 +18,7 @@ let selected_layer = 0;
 disable_all();
 
 async function get_ports(subject, callback) {
-	// console.log('Find ports...');
+	//console.log('Find ports...');
 	await SerialPort.list().then((ports) => {
 		if (ports.length === 0) {
 			//console.log('No ports discovered');
@@ -65,7 +65,7 @@ var layers_arr = [
 function port_listener() {
 	if (connection) {   // If serial port name changed - then create new parcer
 		connection = 0;
-		// console.log('listening on port');
+		//console.log('listening on port');
 		parser.on('data', function (data) {
 			//console.log('> ', data);
 			var bits = data;
@@ -80,7 +80,6 @@ function port_listener() {
 				}
 				temp_count++;
 			}
-
 			if (first_l == 'LAY') { // If first letter is L - LAYER continue read arr from Serial
 				if (bitsArray.length >= 20) {
 					//console.log("Read mode");
@@ -95,7 +94,7 @@ function port_listener() {
 
 
 function recived_data(bitsArray) {
-	// console.log(bitsArray.length);
+	//console.log(bitsArray.length);
 	let counter_a = 0;
 	let counter_b = 0;
 	bitsArray.forEach((i) => { // Separate Line (LAYER 20 0 0 0 0 48) to each symbol
@@ -119,7 +118,7 @@ function recived_data(bitsArray) {
 		counter_a++;
 		counter_b = 0;
 	})
-	// console.log('------');
+	//console.log('------');
 	palce_data(layers_arr);
 	bitsArray.length = 0;
 }
@@ -129,24 +128,19 @@ let name_arr = ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F1
 	'UP_ARROW', 'DOWN_ARROW', 'LEFT_ARROW', 'RIGHT_ARROW', 'C_LOCK', 'BACKSPACE', 'ENTER', 'MENU', 'TAB',
 	'L_CTRL', 'L_SHIFT', 'L_ALT', 'L_GUI', 'R_CTRL', 'R_SHIFT', 'R_ALT', 'R_GUI'];
 let code_arr = [177, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205,
-	 212, 210, 213, 211, 214, 218, 217, 216, 215, 193, 178, 176, 237, 179,
+	212, 210, 213, 211, 214, 218, 217, 216, 215, 193, 178, 176, 237, 179,
 	128, 129, 130, 131, 132, 133, 134, 135];
 
-let notaton_1 = '';
-
+let notation = '';
 for (let i = 0; i < name_arr.length; i++) {
-
-	notaton_1 = notaton_1 + name_arr[i] + ',  ';
-
+	notation = notation + name_arr[i] + ',    ';
 }
-
-document.querySelector('#notation1').innerHTML = notaton_1;
-// document.querySelector('#notation2').innerHTML = notaton_2;
+document.querySelector('#notation1').innerHTML = notation.substring(0, notation.length - 5); // Output name_arr to HTML and remove las ,symbol
 
 function palce_data(data_arr) {   // Placing read data from device
 	let char = '';
 	for (let i = 0; i < data_arr.length; i++) {
-		// console.log(data_arr[i]);
+		//console.log(data_arr[i]);
 		type_field = data_arr[i][4]; // Get position
 		if (type_field > 19) {
 			error_device();
@@ -161,9 +155,9 @@ function palce_data(data_arr) {   // Placing read data from device
 			char = String.fromCharCode(data_arr[i][5]); //Convert ASCII code to character
 		}
 		var inputType = document.querySelector('input[name=' + asdd + ']'); // Prepare for send data to input field
-		// console.log(data_arr.length);
+		//console.log(data_arr.length);
 		inputType.value = char; // Send symbol
-		// console.log(i, ' ', data_arr[i][1], data_arr[i][2], data_arr[i][3]);
+		//console.log(i, ' ', data_arr[i][1], data_arr[i][2], data_arr[i][3]);
 		// Setup checkboxes
 		var ctrl_bool = 0; (data_arr[i][1] > 0) ? ctrl_bool = 1 : ctrl_bool = 0;
 		var alt_bool = 0; (data_arr[i][2] > 0) ? alt_bool = 1 : alt_bool = 0;
@@ -200,7 +194,7 @@ document.querySelector('.b-save').addEventListener('click', () => {
 	document.querySelectorAll('#shift-key, #shift2-key').forEach(function (element) {
 		shift_arr.push(element.checked);
 	});
-	// console.log(key_arr);
+	//console.log(key_arr);
 	let prefix = '$WRITE';
 	let end_line = ';';
 	for (let i = 0; i < ctrl_arr.length; i++) {
@@ -211,8 +205,6 @@ document.querySelector('.b-save').addEventListener('click', () => {
 		let key = 0;
 		if (key_arr[i].length >= 2) {
 			let index = name_arr.indexOf(key_arr[i]);
-
-
 			//console.log(key_arr[i], ' ', key_arr[i].length, ' ', code_arr[index]);
 			key = code_arr[index];
 
@@ -230,57 +222,65 @@ document.querySelector('.b-save').addEventListener('click', () => {
 
 
 // HERE INTERFACE ITERACTIONS
-
 // ENABLE ALL CHECK BOX
 document.querySelectorAll('.ctrl1_all').forEach(function (element) {
-	let ctrl1_all_box = document.querySelector('.ctrl1_all[value=""]');
+	let ctrl1_all_box = false; // document.querySelector('.ctrl1_all[value=""]');
 	element.addEventListener('click', function () {
+		ctrl1_all_box = !ctrl1_all_box;
 		document.querySelectorAll('#ctrl-key').forEach(function (element) {
-			element.checked = ctrl1_all_box.checked;
+			element.checked = ctrl1_all_box; //.checked;
 		});
-		// ctrl2_all_box.checked = false;
+		document.querySelector('.ctrl1_all').checked = false;
 	});
 });
 document.querySelectorAll('.alt1_all').forEach(function (element) {
-	let alt1_all_box = document.querySelector('.alt1_all[value=""]');
+	let alt1_all_box = false;
 	element.addEventListener('click', function () {
+		alt1_all_box = !alt1_all_box;
 		document.querySelectorAll('#alt-key').forEach(function (element) {
-			element.checked = alt1_all_box.checked;
+			element.checked = alt1_all_box;
 		});
+		document.querySelector('.alt1_all').checked = false;
 	});
 });
 document.querySelectorAll('.shift1_all').forEach(function (element) {
-	let shift1_all_box = document.querySelector('.shift1_all[value=""]');
+	let shift1_all_box = false;
 	element.addEventListener('click', function () {
+		shift1_all_box = !shift1_all_box;
 		document.querySelectorAll('#shift-key').forEach(function (element) {
-			element.checked = shift1_all_box.checked;
+			element.checked = shift1_all_box;
 		});
+		document.querySelector('.shift1_all').checked = false;
 	});
 });
-
-
 document.querySelectorAll('.ctrl2_all').forEach(function (element) {
-	let ctrl2_all_box = document.querySelector('.ctrl2_all[value=""]');
+	let ctrl2_all_box = false;
 	element.addEventListener('click', function () {
+		ctrl2_all_box = !ctrl2_all_box;
 		document.querySelectorAll('#ctrl2-key').forEach(function (element) {
-			element.checked = ctrl2_all_box.checked;
+			element.checked = ctrl2_all_box; //.checked;
 		});
+		document.querySelector('.ctrl2_all').checked = false;
 	});
 });
 document.querySelectorAll('.alt2_all').forEach(function (element) {
-	let alt2_all_box = document.querySelector('.alt2_all[value=""]');
+	let alt2_all_box = false;
 	element.addEventListener('click', function () {
+		alt2_all_box = !alt2_all_box;
 		document.querySelectorAll('#alt2-key').forEach(function (element) {
-			element.checked = alt2_all_box.checked;
+			element.checked = alt2_all_box;
 		});
+		document.querySelector('.alt2_all').checked = false;
 	});
 });
 document.querySelectorAll('.shift2_all').forEach(function (element) {
-	let shift2_all_box = document.querySelector('.shift2_all[value=""]');
+	let shift2_all_box = false;
 	element.addEventListener('click', function () {
+		shift2_all_box = !shift2_all_box;
 		document.querySelectorAll('#shift2-key').forEach(function (element) {
-			element.checked = shift2_all_box.checked;
+			element.checked = shift2_all_box;
 		});
+		document.querySelector('.shift2_all').checked = false;
 	});
 });
 
@@ -301,13 +301,11 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 	const dropDownList = dropDownWrapper.querySelector('.dropdown__list');
 	const dropDownListItems = dropDownList.querySelectorAll('.dropdown__list-item');
 	const dropDownInput = dropDownWrapper.querySelector('.dropdown__input-hidden');
-
 	// Click Open/Close select
 	dropDownBtn.addEventListener('click', function (e) {
 		dropDownList.classList.toggle('dropdown__list--visible');
 		// this.classList.add('dropdown__button--active');
 	});
-
 	// Select form lis. remember value. Close dropdown
 	dropDownListItems.forEach(function (listItem) {
 		listItem.addEventListener('click', function (e) {
@@ -320,7 +318,6 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 			document.querySelector('#save_btn').removeAttribute("disabled", "");  //Enable Seve button
 		});
 	});
-
 	// If clicked out - close dropdown
 	document.addEventListener('click', function (e) {
 		if (e.target !== dropDownBtn) {
@@ -328,7 +325,6 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 			dropDownList.classList.remove('dropdown__list--visible');
 		}
 	});
-
 	// press Tab or Escape key - close dropdown
 	document.addEventListener('keydown', function (e) {
 		if (e.key === 'Tab' || e.key === 'Escape') {
@@ -348,15 +344,16 @@ function disable_all() {
 		element.setAttribute("disabled", "");
 	});
 	document.querySelector('#save_btn').setAttribute("disabled", "");
-
 	document.querySelector('.dropdown__button').innerHTML = 'Select';
-
 	document.querySelectorAll('.top-title').forEach(function (element) {
 		element.classList.remove('top-title');
 		element.classList.add('top-title-disabled');
 	});
-	document.querySelector('#status').innerHTML = 'Disconnected';
+	document.querySelector('#status').innerHTML = 'Status: disconnected';
 	document.querySelector('.reset_btn').setAttribute("disabled", "");
+	document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) { // Close dropdown menu when disconnected
+		dropDownWrapper.querySelector('.dropdown__list').classList.remove('dropdown__list--visible');
+	});
 }
 
 
@@ -365,12 +362,12 @@ function enable_all() {
 		element.removeAttribute("disabled", "");
 	});
 	document.querySelector('.dropdown__button').innerHTML = 'Select';
-
 	document.querySelectorAll('.top-title-disabled').forEach(function (element) {
 		element.classList.remove('top-title-disabled');
 		element.classList.add('top-title');
 	});
-	document.querySelector('#status').innerHTML = 'Connected';
+	document.querySelector('#status').innerHTML = 'Status: connected';
+	document.querySelector('.reset_btn').removeAttribute("disabled", "");
 }
 
 

@@ -6,7 +6,7 @@ body {
 	margin: 40;
 	padding: 0px;
 	font-family: sans-serif;
-	line-height: 30px;
+	/* line-height: 30px; */
 	/* user-select: none; */
 }
 
@@ -16,6 +16,7 @@ body {
 	font-size: 18px;
 	color: #545454;
 	cursor: default;
+	line-height: 70px;
 }
 
 .top-title-disabled {
@@ -24,24 +25,25 @@ body {
 	font-size: 18px;
 	color: #979797;
 	cursor: default;
+	line-height: 70px;
 }
 
 .notation-title {
 	font-family: sans-serif;
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 14px;
 	color: #545454;
 	cursor: default;
-	line-height: 8px;
+	line-height: 20px;
 }
 
 .notation {
 	font-family: sans-serif;
-	font-weight: 700;
-	font-size: 13px;
+	font-weight: normal;
+	font-size: 12px;
 	color: #545454;
 	cursor: default;
-	line-height: 8px;
+	line-height: 15px;
 }
 
 .form-group-title {
@@ -67,6 +69,8 @@ label {
 
 .about {
 	display: inline-block;
+	line-height: 28px;
+
 }
 
 .about img {
@@ -147,14 +151,14 @@ Select c dropdown на JS
 	right: 10px;
 	transform: translateY(-50%);
 
-	/* Рисуем треугольник */
+	/* Make triangle sing */
 	width: 0;
 	height: 0;
 	border-width: 8px 6px 0 6px;
 	border-color: #79849B transparent transparent transparent;
 	border-style: solid;
 
-	/* Снимаем клик с треугольника */
+	/* Doesn't clicable */
 	pointer-events: none;
 }
 

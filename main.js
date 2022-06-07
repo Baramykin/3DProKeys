@@ -6,13 +6,16 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 560,
-    height: 710,
+    height: 640,
+    resizable: false, // Lock resizable of windows
+    icon: __dirname + '/images.png', // set favicon
     webPreferences: {
       nodeIntegration: true, // to allow require
       contextIsolation: false, // allow use with Electron 12+
-      preload: path.join(__dirname, 'preload.js')
     }
   })
+
+  mainWindow.setMenu(null); // Remove menu bar
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
@@ -21,9 +24,9 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools()
 }
 
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
-// Некоторые интерфейсы API могут использоваться только после возникновения этого события.
 app.whenReady().then(() => {
   createWindow()
 
@@ -40,6 +43,3 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. Можно также поместить их в отдельные файлы и применить к ним require.
