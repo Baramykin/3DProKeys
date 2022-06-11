@@ -5,7 +5,7 @@ const path = require('path')
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 560,
+    width: 550,
     height: 640,
     resizable: false, // Lock resizable of windows
     icon: __dirname + '/images.png', // set favicon

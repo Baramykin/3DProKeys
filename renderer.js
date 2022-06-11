@@ -18,14 +18,16 @@ let selected_layer = 0;
 disable_all();
 
 async function get_ports(subject, callback) {
-	//console.log('Find ports...');
 	await SerialPort.list().then((ports) => {
+		// console.log('Find ports...', ports);
 		if (ports.length === 0) {
 			//console.log('No ports discovered');
 		}
 		for (let i = 0; i < ports.length; i++) {
-			let str = ports[i].friendlyName.indexOf('Board CDC'); // Find KeyPro device
-			if (str === 0) {			//  && port_name != ports[i].path
+			// let str = ports[i].friendlyName.indexOf('Board CDC'); // Find KeyPro device
+			// if (str === 0) {			//  && port_name != ports[i].path
+			// Find raspberry Pi Pico: serialNumber: 16 symbols; vendorId: 2E8A; productId: 800A
+			if (ports[i].vendorId === '2E8A' && ports[i].serialNumber.length === 16 && ports[i].productId === '800A') {
 				if (port_name != ports[i].path) {
 					port_name = ports[i].path;
 					//console.log('Port_name: ', port_name, 'connected!');
