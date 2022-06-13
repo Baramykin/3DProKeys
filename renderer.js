@@ -133,11 +133,11 @@ let code_arr = [177, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205,
 	212, 210, 213, 211, 214, 218, 217, 216, 215, 193, 178, 176, 237, 179,
 	128, 129, 130, 131, 132, 133, 134, 135];
 
-let notation = '';
+let notation = ''; //Arr for output Compatible symbols and special keys
 for (let i = 0; i < name_arr.length; i++) {
 	notation = notation + name_arr[i] + ',    ';
 }
-document.querySelector('#notation1').innerHTML = notation.substring(0, notation.length - 5); // Output name_arr to HTML and remove las ,symbol
+document.querySelector('#notation1').innerHTML = notation.substring(0, notation.length - 5); // Output name_arr to HTML and remove last ,symbol
 
 function palce_data(data_arr) {   // Placing read data from device
 	let char = '';
@@ -196,7 +196,20 @@ document.querySelector('.b-save').addEventListener('click', () => {
 	document.querySelectorAll('#shift-key, #shift2-key').forEach(function (element) {
 		shift_arr.push(element.checked);
 	});
-	//console.log(key_arr);
+
+	// Change position #9 that \ key to #0 position in all arrays
+	let tmp1 = key_arr.splice(9,1)[0];
+	key_arr.splice(0, 0, tmp1);
+
+	let tmp2 = ctrl_arr.splice(9,1)[0];
+	ctrl_arr.splice(0, 0, tmp2);
+
+	let tmp3 = alt_arr.splice(9,1)[0];
+	alt_arr.splice(0, 0, tmp3);
+
+	let tmp4 = shift_arr.splice(9,1)[0];
+	shift_arr.splice(0, 0, tmp4);
+
 	let prefix = '$WRITE';
 	let end_line = ';';
 	for (let i = 0; i < ctrl_arr.length; i++) {
@@ -222,8 +235,21 @@ document.querySelector('.b-save').addEventListener('click', () => {
 	document.querySelector('.b-save').removeAttribute("disabled", ""); // enable button when saved data done
 });
 
+function error_device() {
+	disable_all();
+	//console.log('Reser device, please');
+	document.querySelector('.reset_btn').removeAttribute("disabled", "");  //Activate Reset button
+	return;
+}
 
-// HERE INTERFACE ITERACTIONS
+
+function reset_device() {
+	port.write('$DEFAULT;');
+	disable_all();
+	enable_all();
+}
+
+// HERE INTERFACE ITERACTIONS -----------------------------------------------------------------------------------------------
 // ENABLE ALL CHECK BOX
 document.querySelectorAll('.ctrl1_all').forEach(function (element) {
 	let ctrl1_all_box = false; // document.querySelector('.ctrl1_all[value=""]');
@@ -370,17 +396,4 @@ function enable_all() {
 	});
 	document.querySelector('#status').innerHTML = 'Status: connected';
 	document.querySelector('.reset_btn').removeAttribute("disabled", "");
-}
-
-
-function error_device() {
-	disable_all();
-	//console.log('Reser device, please');
-	document.querySelector('.reset_btn').removeAttribute("disabled", "");  //Activate Reset button
-	return;
-}
-
-
-function reset_device() {
-	port.write('$DEFAULT;');
 }
