@@ -1,7 +1,7 @@
 // KEY PAD PRO V1 PRERELISE
 // START DATE: 9.05.2022
 // AUTOR: BARAMYKIN VIKTOR
-// LAST UPDATE: 7.06.2022
+// LAST UPDATE: 16.06.2022
 
 const { SerialPort } = require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline');
@@ -179,6 +179,13 @@ function get_layer(x) {   // Send request to device. Get settings from EEPROM
 
 // SAVE BOTTOM
 document.querySelector('.b-save').addEventListener('click', () => {
+	document.querySelector('.ctrl1_all').checked = false; // UNCHECK ALL CHECK BOX
+	document.querySelector('.ctrl2_all').checked = false;
+	document.querySelector('.alt1_all').checked = false;
+	document.querySelector('.alt2_all').checked = false;
+	document.querySelector('.shift1_all').checked = false;
+	document.querySelector('.shift2_all').checked = false;
+	document.querySelector('.ctrl1_all').checked = false;
 	document.querySelector('.b-save').setAttribute("disabled", ""); // disable button when save data
 	let ctrl_arr = [];
 	let alt_arr = [];
@@ -198,16 +205,16 @@ document.querySelector('.b-save').addEventListener('click', () => {
 	});
 
 	// Change position #9 that \ key to #0 position in all arrays
-	let tmp1 = key_arr.splice(9,1)[0];
+	let tmp1 = key_arr.splice(9, 1)[0];
 	key_arr.splice(0, 0, tmp1);
 
-	let tmp2 = ctrl_arr.splice(9,1)[0];
+	let tmp2 = ctrl_arr.splice(9, 1)[0];
 	ctrl_arr.splice(0, 0, tmp2);
 
-	let tmp3 = alt_arr.splice(9,1)[0];
+	let tmp3 = alt_arr.splice(9, 1)[0];
 	alt_arr.splice(0, 0, tmp3);
 
-	let tmp4 = shift_arr.splice(9,1)[0];
+	let tmp4 = shift_arr.splice(9, 1)[0];
 	shift_arr.splice(0, 0, tmp4);
 
 	let prefix = '$WRITE';
@@ -252,63 +259,51 @@ function reset_device() {
 // HERE INTERFACE ITERACTIONS -----------------------------------------------------------------------------------------------
 // ENABLE ALL CHECK BOX
 document.querySelectorAll('.ctrl1_all').forEach(function (element) {
-	let ctrl1_all_box = false; // document.querySelector('.ctrl1_all[value=""]');
 	element.addEventListener('click', function () {
-		ctrl1_all_box = !ctrl1_all_box;
+		let ctrl1_all_box = document.querySelector('.ctrl1_all').checked;
 		document.querySelectorAll('#ctrl-key').forEach(function (element) {
 			element.checked = ctrl1_all_box; //.checked;
 		});
-		document.querySelector('.ctrl1_all').checked = false;
 	});
 });
 document.querySelectorAll('.alt1_all').forEach(function (element) {
-	let alt1_all_box = false;
 	element.addEventListener('click', function () {
-		alt1_all_box = !alt1_all_box;
+		let alt1_all_box = document.querySelector('.alt1_all').checked;
 		document.querySelectorAll('#alt-key').forEach(function (element) {
 			element.checked = alt1_all_box;
 		});
-		document.querySelector('.alt1_all').checked = false;
 	});
 });
 document.querySelectorAll('.shift1_all').forEach(function (element) {
-	let shift1_all_box = false;
 	element.addEventListener('click', function () {
-		shift1_all_box = !shift1_all_box;
+		shift1_all_box = document.querySelector('.shift1_all').checked;
 		document.querySelectorAll('#shift-key').forEach(function (element) {
 			element.checked = shift1_all_box;
 		});
-		document.querySelector('.shift1_all').checked = false;
 	});
 });
 document.querySelectorAll('.ctrl2_all').forEach(function (element) {
-	let ctrl2_all_box = false;
 	element.addEventListener('click', function () {
-		ctrl2_all_box = !ctrl2_all_box;
+		ctrl2_all_box = document.querySelector('.ctrl2_all').checked;
 		document.querySelectorAll('#ctrl2-key').forEach(function (element) {
 			element.checked = ctrl2_all_box; //.checked;
 		});
-		document.querySelector('.ctrl2_all').checked = false;
 	});
 });
 document.querySelectorAll('.alt2_all').forEach(function (element) {
-	let alt2_all_box = false;
 	element.addEventListener('click', function () {
-		alt2_all_box = !alt2_all_box;
+		alt2_all_box = document.querySelector('.alt2_all').checked;
 		document.querySelectorAll('#alt2-key').forEach(function (element) {
 			element.checked = alt2_all_box;
 		});
-		document.querySelector('.alt2_all').checked = false;
 	});
 });
 document.querySelectorAll('.shift2_all').forEach(function (element) {
-	let shift2_all_box = false;
 	element.addEventListener('click', function () {
-		shift2_all_box = !shift2_all_box;
+		shift2_all_box = document.querySelector('.shift2_all').checked;
 		document.querySelectorAll('#shift2-key').forEach(function (element) {
 			element.checked = shift2_all_box;
 		});
-		document.querySelector('.shift2_all').checked = false;
 	});
 });
 
@@ -344,6 +339,12 @@ document.querySelectorAll('.dropdown').forEach(function (dropDownWrapper) {
 			dropDownList.classList.remove('dropdown__list--visible');
 			selected_layer = dropDownBtn.innerText;
 			document.querySelector('#save_btn').removeAttribute("disabled", "");  //Enable Seve button
+			document.querySelector('.ctrl1_all').checked = false; // UNCHECK ALL
+			document.querySelector('.ctrl2_all').checked = false;
+			document.querySelector('.alt1_all').checked = false;
+			document.querySelector('.alt2_all').checked = false;
+			document.querySelector('.shift1_all').checked = false;
+			document.querySelector('.shift2_all').checked = false;
 		});
 	});
 	// If clicked out - close dropdown
